@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wbh.testsecurity.chat.mapper.MessageMapper">
+    <insert id="add" parameterType="Message">
+        INSERT INTO `message-1` (id, owner, repliescnt, message, time)
+        VALUES (#{id}, #{owner}, #{repliescnt}, #{message}, #{time})
+    </insert>
+    <select id="find1" parameterType="Message">
+        SELECT * FROM `message-1` WHERE id = #{id};
+    </select>
+    <select id="find2byid" parameterType="RMessage">
+        SELECT * FROM `message-2` WHERE id = #{id};
+    </select>
+    <delete id="delete1" parameterType="Message">
+        DELETE FROM `message-1` WHERE id = #{id};
+    </delete>
+    <insert id="addR" parameterType="Message">
+        INSERT INTO `message-2` (id, owner, replyfrom, message, time)
+        VALUES (#{id}, #{owner}, #{replyfrom}, #{message}, #{time})
+    </insert>
+    <update id="update" parameterType="Message">
+        UPDATE `message-1` SET repliescnt = #{repliescnt}
+        WHERE id = #{id};
+    </update>
+    <select id="find2in1" parameterType="RMessage">
+        SELECT * FROM `message-2` WHERE replyfrom = #{id};
+    </select>
+    <select id="cnt" parameterType="RMessage" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM `message-2` WHERE replyfrom = #{id}
+    </select>
+    <select id="find2in2" parameterType="RMessage">
+        SELECT * FROM `message-2` WHERE replyfrom = #{id};
+    </select>
+    <select id="findcnt" parameterType="RMessage" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM `message-2` WHERE id = #{replyfrom}
+    </select>
+    <select id="finddad" parameterType="RMessage" resultType="java.lang.Integer">
+        SELECT * FROM `message-2` WHERE id = #{replyfrom}
+    </select>
+    <delete id="delete2" parameterType="RMessage">
+        DELETE FROM `message-2` WHERE id = #{id};
+    </delete>
+    <update id="setnull" parameterType="RMessage">
+        UPDATE `message-2` SET message = null
+        WHERE id = #{id};
+    </update>
+</mapper>

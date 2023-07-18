@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wbh.testsecurity.chat.mapper.AttemptMapper">
+    <update id="update" parameterType="Attempt">
+          UPDATE attempt SET lasttry = #{lasttry}, falsecnt = #{falsecnt}
+              WHERE id = #{id};
+    </update>
+    <insert id="insert" parameterType="Attempt">
+          INSERT INTO attempt (id, lasttry, falsecnt) VALUES (#{id}, #{lasttry}, #{falsecnt});
+    </insert>
+    <select id="find" resultType="Attempt">
+          SELECT * FROM attempt WHERE id = #{id};
+    </select>
+</mapper>
